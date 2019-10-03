@@ -4,11 +4,11 @@ const protocolClient = new Protocol();
 
 protocolClient.connect({
   host: "localhost",
-  port:9878,
+  port:9000,
 });
 
 
-protocolClient.on("open", (server)=>{
+protocolClient.on("open", ()=>{
   console.log("client connected");
   // Connect 하고 client가 먼저 메세지를 보낸다면 여기..
 

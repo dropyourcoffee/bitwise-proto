@@ -1,5 +1,4 @@
-const net = require("net");
-// import net from "net";
+import net from "net";
 import {EventEmitter} from "events";
 
 // Server Impl
@@ -21,11 +20,6 @@ class ProtocolServer extends EventEmitter{
     // 처음 접속 되었을때 trigger할 함수 :: onFirstConnect
     if (this.onFirstConnect)
       this.srv.addListener("connection", this.onFirstConnect);
-    // if (this.onFirstConnect)
-    //   this.srv.addListener("connection", function(cli){
-    //     console.log("welcoms")
-    //     cli.write("welcome");
-    //   })
 
     this.srv.listen(this.port, ()=>{
       console.log(`listening on ${this.port}`)

@@ -1,7 +1,7 @@
 import ProtocolServer from "../src/server/index"
 
 ///  Server ///
-const protocolServer = new ProtocolServer("localhost", 9878 );
+const protocolServer = new ProtocolServer("localhost", 9000 );
 
 
 // 연결 되자 마자 보낼 할 작업.
