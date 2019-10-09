@@ -2,23 +2,31 @@
   "name": "bitwise-proto",
   "version": "0.0.1",
   "description": "Build your own bitwise TCP protocol over net (alpha)",
-  "main": "bundle.js",
+  "main": "./bundle.js",
   "scripts": {
-    "test": "./src/index.js"
+    "test": "./src/index.js",
+    "build": "webpack -p --optimize-dedupe --optimize-minimize --color"
   },
   "keywords": [
     "TCP",
     "Bitwise"
   ],
-  "author": "Dexter Jung",
+  "author": {
+    "name": "Dexter Jung",
+    "email": "dropyourcoffee@gmail.com"
+  },
   "license": "ISC",
   "dependencies": {
     "events": "^3.0.0",
     "net": "^1.0.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.2",
-    "@babel/core": "^7.6.2",
-    "@babel/node": "^7.6.2"
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.4",
+    "@babel/node": "^7.5.0",
+    "@babel/preset-env": "^7.5.4",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9",
+    "yargs": "^14.0.0"
   }
 }

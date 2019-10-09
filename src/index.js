@@ -1,10 +1,17 @@
 import net from "net";
 import {EventEmitter} from "events";
-
+import Field from "./Field";
 
 class Protocol extends EventEmitter{
-  constructor(){
+  constructor(headerRule, bodyRule){
     super();
+
+    this.headerRule = (typeof(headerRule) === "function" )? headerRule() : null;
+    this.bodyRule = bodyRule();
+    this.Fields = {};
+    this.bodyRule.Fields.forEach(fieldRule=>{
+      this.Fields[fieldRule.name] = fieldRule;
+    })
 
   }
 
@@ -26,6 +33,35 @@ class Protocol extends EventEmitter{
     })
   }
 
+  createMessage(...fields){
+    let msg = ""
+    if (this.headerRule !== null){
+      let msg = {
+        body:""
+      };
+
+      fields.forEach(f=>{
+        msg.body += f.value();
+      });
+
+      let complete = Buffer.alloc(this.headerRule.totalLength + msg.body.length);
+      complete.write(msg.body, this.headerRule.totalLength);
+
+
+      this.headerRule.Fields.reduce((offset, rule)=>{
+        complete.write(rule.get(msg), offset);
+        return offset + rule.length
+      },0)
+
+      return complete;
+
+    }else{
+
+    }
+    return msg
+
+  }
+
   send(msgToSend){
     // 연결된 상태라면
     if(this.srv){
@@ -40,6 +76,8 @@ class Protocol extends EventEmitter{
 
 
 }
+
+export {Field};
 
 export default Protocol;
 

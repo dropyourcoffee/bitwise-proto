@@ -1,4 +1,4 @@
-import ProtocolServer from "../src/server/index"
+import ProtocolServer from "../src/server"
 
 ///  Server ///
 const protocolServer = new ProtocolServer("localhost", 9000 );
